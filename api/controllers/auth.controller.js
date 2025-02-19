@@ -1,6 +1,6 @@
 const User = require("../models/user.model");
 const bcryptjs = require("bcryptjs");
-const { errorHandler } = require("../utils/error");
+// const { errorHandler } = require("../utils/error");
 
 exports.signup= async (req,res,next)=>{
     const {username, email, password} = req.body;
