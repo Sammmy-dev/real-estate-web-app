@@ -1,6 +1,7 @@
 const User = require("../models/user.model");
 const bcryptjs = require("bcryptjs");
-// const { errorHandler } = require("../utils/error");
+const jwt= require("jsonwebtoken")
+const { errorHandler } = require("../utils/error");
 
 exports.signup= async (req,res,next)=>{
     const {username, email, password} = req.body;
@@ -13,4 +14,37 @@ exports.signup= async (req,res,next)=>{
         next(error)
     }
     
-}
+};
+
+exports.signin= async (req,res,next)=>{
+    const {email, password} = req.body;
+    try {
+        const userFound = await User.findOne({email});
+        if (!userFound) {
+            return("Invalid cridentials")
+        }
+
+        const passwordMatch = await bcryptjs.compare(password, userFound.password);
+
+        if (!passwordMatch) {
+            throw new Error("Invalid cridentials")
+        }
+
+        const token = jwt.sign({id: userFound._id}, process.env.JWT_SECRET, {expiresIn: "30d"});
+
+        const userToSend = { ...userFound.toObject() }; // Create a shallow copy to prevent modification of the original
+        delete userToSend.password;
+        res.cookie(
+            "accessToken",
+             token,
+             {
+                httpOnly: true,
+                expires: new Date(Date.now() + 24*60*60*1000)
+             }
+        ).status(200).json(userToSend);
+
+    } catch (error) {
+        next(error)
+    }
+    
+};
