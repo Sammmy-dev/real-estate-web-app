@@ -19,6 +19,11 @@ exports.signup= async (req,res,next)=>{
 exports.signin= async (req,res,next)=>{
     const {email, password} = req.body;
     try {
+        if (email == undefined) {
+            
+            throw new Error("Fill all fields")
+        }
+        
         const userFound = await User.findOne({email});
         if (!userFound) {
             return("Invalid cridentials")

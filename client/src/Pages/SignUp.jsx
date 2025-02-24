@@ -48,6 +48,7 @@ const SignUp = () => {
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className=' my-7 text-center text-3xl font-semibold'>SignUp</h1>
+      {error && <p className='text-red-500 mt-3'>{error}</p>}
       <form onSubmit={handleSubmit} action="" className='flex flex-col gap-3 mt-10'>
         <input type="text" placeholder='Username' className='border block p-3 rounded-lg' id='username' onChange={handleChange}/>
         <input type="email" placeholder='Email' className='border block p-3 rounded-lg' id='email' onChange={handleChange}/>
@@ -57,7 +58,6 @@ const SignUp = () => {
         </button>
       </form>
       <p className='mt-3'>Have an account? <Link to="/sign-in" className='text-blue-500'>Signin</Link></p>
-      {error && <p className='text-red-500 mt-3'>{error}</p>}
     </div>
   )
 }
