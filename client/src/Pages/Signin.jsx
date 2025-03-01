@@ -32,7 +32,6 @@ const SignUp = () => {
         }
       );
       const data = await res.json();
-      console.log(data);
       
       if (data.success === false) {
         // setLoading(false);
@@ -43,6 +42,8 @@ const SignUp = () => {
       // setLoading(false);
       // setError(null);
       dispatch(signInSuccess(data))
+      // localStorage.setItem("userInfo",JSON.stringify(data.token)) 
+      console.log(data);
       navigate('/')
     } catch (error) {
       // setLoading(false);
