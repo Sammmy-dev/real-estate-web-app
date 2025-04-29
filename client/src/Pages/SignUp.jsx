@@ -54,9 +54,7 @@ const SignUp = () => {
         <input type="text" placeholder='Username' className='border block p-3 rounded-lg' id='username' onChange={handleChange}/>
         <input type="email" placeholder='Email' className='border block p-3 rounded-lg' id='email' onChange={handleChange}/>
         <input type="password" placeholder='Password' className='border block p-3 rounded-lg' id='password' onChange={handleChange}/>
-        <button disabled={loading} className='bg-slate-500 text-white rounded-lg uppercase hover:bg-slate-950 p-3 disabled:opacity-80'>
-          {loading ? 'loading...': "Signup"}
-        </button>
+        
         <OAuth/>
       </form>
       <p className='mt-3'>Have an account? <Link to="/sign-in" className='text-blue-500'>Signin</Link></p>

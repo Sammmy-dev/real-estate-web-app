@@ -45,7 +45,7 @@ const SignUp = () => {
       dispatch(signInSuccess(data))
       // localStorage.setItem("userInfo",JSON.stringify(data.token)) 
       console.log(data);
-      navigate('/')
+      navigate('/profile')
     } catch (error) {
       // setLoading(false);
       // setError(error.message);
